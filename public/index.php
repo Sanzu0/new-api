@@ -2,19 +2,16 @@
 
 use Illuminate\Http\Request;
 
-// Record the start time for profiling (optional)
 define('LARAVEL_START', microtime(true));
 
-// Check if the application is in maintenance mode
-$maintenanceFile = __DIR__.'/../storage/framework/maintenance.php';
-if (file_exists($maintenanceFile)) {
-    require $maintenanceFile; // If the app is in maintenance mode, this file will handle it
+// Determine if the application is in maintenance mode...
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
 }
 
-// Include the Composer autoloader to load the app's dependencies
+// Register the Composer autoloader...
 require __DIR__.'/../vendor/autoload.php';
 
-// Bootstrap the Laravel application and handle the incoming request
-// This initializes the app and sends a response back to the client
+// Bootstrap Laravel and handle the request...
 (require_once __DIR__.'/../bootstrap/app.php')
-    ->handle(Request::capture());
+    ->handleRequest(Request::capture());
