@@ -4,12 +4,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/migrate', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    return 'Migrations executed successfully!';
-});
-
-
 Route::get('/', function () {
     return redirect('/dashboard');
 });
